@@ -7,8 +7,8 @@
  * 3. Set VITE_QUOTE_API_URL to that endpoint (e.g. https://api.yourdomain.ca/quote).
  * 4. Send the same payload shape as `buildQuotePayload` from this module.
  *
- * VITE_QUOTE_RECEIVER_EMAIL is exposed for documentation and for non-production demos only.
- * In production, keep the destination email on the server.
+ * Destination inbox is configured on the server (MAIL_TO_QUOTE / MAIL_TO). Optional
+ * VITE_QUOTE_RECEIVER_EMAIL is only for UI copy in demo mode.
  */
 
 import { getQuoteConfig } from '@/config/env'
@@ -46,13 +46,28 @@ export async function submitQuoteRequest(formValues) {
     body: JSON.stringify(payload),
   })
 
+  const raw = await res.text().catch(() => '')
+  let data = null
+  try {
+    data = raw ? JSON.parse(raw) : null
+  } catch {
+    data = null
+  }
+
   if (!res.ok) {
-    const text = await res.text().catch(() => '')
     return {
       ok: false,
-      message: text || 'We could not send your request. Please call the shop or try again.',
+      message:
+        (data && typeof data.message === 'string' && data.message) ||
+        raw ||
+        'We could not send your request. Please call the shop or try again.',
     }
   }
 
-  return { ok: true, message: 'Thanks — we received your quote request.' }
+  return {
+    ok: true,
+    message:
+      (data && typeof data.message === 'string' && data.message) ||
+      'Thanks — we received your quote request.',
+  }
 }

@@ -79,12 +79,18 @@ const cfg = computed(() => getQuoteConfig())
             <div class="rounded-2xl border border-dashed border-zinc-300 p-6 text-xs leading-relaxed text-zinc-500 dark:border-zinc-700 dark:text-zinc-500">
               <p class="font-semibold text-zinc-700 dark:text-zinc-300">Developer note</p>
               <p class="mt-2">
-                Wire
-                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">POST</code>
-                to your API via
-                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">VITE_QUOTE_API_URL</code>. Keep recipient email
-                on the server. See
-                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">src/services/quoteService.js</code>.
+                Mail is sent by
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">server/index.js</code>
+                using SMTP variables from
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">.env</code>
+                (never
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">VITE_*</code>
+                for secrets). The frontend posts to
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">VITE_QUOTE_API_URL</code>
+                (proxied to
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">/api/quote</code>
+                in dev). See
+                <code class="rounded bg-zinc-100 px-1 dark:bg-zinc-800">.env.example</code>.
               </p>
             </div>
           </aside>
