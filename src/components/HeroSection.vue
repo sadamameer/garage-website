@@ -46,7 +46,7 @@ defineProps({
         <h1
           class="reveal-base mt-4 font-display text-4xl font-semibold tracking-tight text-white text-balance sm:text-5xl lg:text-6xl"
         >
-          Straight answersas. Skilled repairs. A shop you can rely on.
+          Straight answers. Skilled repairs. A shop you can rely on.
         </h1>
         <p
           class="reveal-base mt-6 text-lg leading-relaxed text-zinc-300 text-balance"
